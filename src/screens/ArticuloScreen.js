@@ -17,13 +17,13 @@ import {AntDesign} from "@expo/vector-icons";
 // Icons
 
 import {Feather, FontAwesome} from '@expo/vector-icons'
-import {auth, db} from '../../firebase2'
+import {auth, db} from '../firebase'
 import {Button} from 'react-native-elements'
 import {useNavigation} from "@react-navigation/native";
 
 const image = {uri: "https://reactjs.org/logo-og.png"};
 
-const BlogPage = (props) => {
+const ArticuloScreen = (props) => {
     const navigation = useNavigation()
     const initialState = {
         autor: "",
@@ -36,6 +36,7 @@ const BlogPage = (props) => {
         commentValue: "",
 
     };
+    console.log(props.route.params.userId)
     const [Comments, SetComments] = useState([]);
     const [commentValue, setCommentValue] = useState('');
     const [showComment, setShowComment] = useState(false);
@@ -49,7 +50,7 @@ const BlogPage = (props) => {
                 autor : auth.currentUser.email
             };
             // This clears the TextInput Field
-            const ref = db.collection('Inventario').doc(props.route.params.userId);
+            const ref = db.collection('Articulos').doc(props.route.params.userId);
             await ref.update({
                 comments: arrayUnion(temp)
             });
@@ -73,7 +74,7 @@ const BlogPage = (props) => {
     const [user, setUser] = useState(initialState);
     const [loading, setLoading] = useState(true);
     const getUserById = async (id) => {
-        const dbRef = db.collection('Inventario').doc(id)
+        const dbRef = db.collection('Articulos').doc(id)
         const doc = await dbRef.get()
         const user = doc.data()
         setUser({...user, id: doc.id});
@@ -89,7 +90,7 @@ const BlogPage = (props) => {
         if (user.autor === auth.currentUser.email || auth.currentUser.email === "victor.ignacio.salgado2002@gmail.com" || auth.currentUser.email === "joakomask@gmail.com") {
             setLoading(true)
             const dbRef = db
-                .collection("Inventario")
+                .collection("Articulos")
                 .doc(props.route.params.userId);
             await dbRef.delete();
             setLoading(false)
@@ -101,11 +102,10 @@ const BlogPage = (props) => {
     };
 
     const {width, height} = Dimensions.get('window')
-    const {data} = props.route.params;
+    //const {data} = props.route.params;
     //access to data inside array of objects
-
     useEffect(() => {
-        db.collection('Inventario').onSnapshot(querySnapshot => {
+        db.collection('Articulos').onSnapshot(querySnapshot => {
             const lista = []
             querySnapshot.docs.forEach(doc => {
                 if(commentValue !== ""){
@@ -117,6 +117,7 @@ const BlogPage = (props) => {
 
             })
             setBlogsList([...lista])
+            console.log(lista)
         })
 
     }, [])
@@ -125,7 +126,7 @@ const BlogPage = (props) => {
         getCommentsFromDatabase()
     }, []);
     const getCommentsFromDatabase = async () => {
-        const dbRef = db.collection('Inventario').doc(props.route.params.userId);
+        const dbRef = db.collection('Articulos').doc(props.route.params.userId);
         const doc = await dbRef.get()
         const comments = doc.data().comments
         SetComments(comments)
@@ -134,13 +135,12 @@ const BlogPage = (props) => {
             <View style={{flex: 1, backgroundColor: '#fff'}}>
                 <View>
                     <SharedElement>
-                    <Image
-                                        //añadir imagen
-                                        style={{ width: "100%", height: 300 }}
-                                        resizeMode="contain"
-                                        onPress={()=>{navigation.navigate('PostScreen',{userId: item.id})}}
-                                    />
-                       
+                        <Image source={require('../assets/icon.png')} style={{
+                            width: '100%',
+                            height: height - 450,
+                            borderBottomLeftRadius: 10,
+                            borderBottomRightRadius: 10
+                        }} resizeMode="cover"/>
                         {auth.currentUser.email === user.autor || auth.currentUser.email === "victor.ignacio.salgado2002@gmail.com" || auth.currentUser.email === "joakomask@gmail.com"  ?
                         <>
                             <Button
@@ -194,64 +194,7 @@ const BlogPage = (props) => {
                                 </SharedElement>
                                 <SharedElement>
                                     <Text style={{color: 'black', fontSize: 12,}}>{user.nickname}</Text>
-                                </SharedElement>
-                                <View>
-                                    <FontAwesome name="commenting" size={34} color="black" />
-
-                                    <View>
-                                        <TextInput
-                                            onChangeText={(text) => setCommentValue(text)}
-                                            placeholder="Comenta algo lindo..."
-                                            ref={InputRef}
-                                            style={{width:'100%'}}
-                                        />
-                                        <Button title="Comentar" buttonStyle={{
-                                            backgroundColor: '#00a680',
-                                            width:'100%'
-
-                                        }} onPress={() => AddToComments()} />
-
-                                        {function () {
-                                            if (Comments){
-                                            if (Comments.length > 0) {
-                                                return Comments.map((comment, index) => {
-                                                    return (
-                                                        <View key={index}>
-                                                            <View style={styles.showComment_container}>
-                                                                <Text style>{comment.commentValue}</Text>
-                                                            </View>
-                                                        </View>
-                                                    )
-                                                })
-                                            }else{
-                                                return(
-                                                    <View style={{
-                                                        flexDirection: 'row',
-                                                        alignItems: 'center',
-                                                        marginTop: 14
-                                                    }}>
-                                                        <View style={{
-                                                            flex: 1,
-                                                            flexDirection: 'row',
-                                                            alignItems: 'center',
-                                                            justifyContent: 'space-between',
-                                                            paddingRight: 20
-                                                        }}>
-                                                            <View>
-                                                                <SharedElement>
-                                                                    <Text style={{color: 'black', fontSize: 14, fontWeight: 'bold'}}/>
-                                                                </SharedElement>
-                                                                <SharedElement>
-                                                                    <Text style={{color: 'black', fontSize: 12,}}>No hay comentarios</Text>
-                                                                </SharedElement>
-                                                            </View>
-                                                        </View>
-                                                    </View>
-                                                )
-                                            }
-                                        }}()}
-                                    </View>
-                                </View>
+                                </SharedElement>                               
                             </View>
                         </View>
                     </View>
@@ -262,7 +205,7 @@ const BlogPage = (props) => {
 
 };
 
-export default BlogPage;
+export default ArticuloScreen;
 const styles = StyleSheet.create({
     container: {
         flex: 1,

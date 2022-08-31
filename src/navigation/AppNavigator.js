@@ -42,7 +42,7 @@ const AppNavigator = () => {
           component={Search}
           options={{
             tabBarIcon: ({ color, size }) => (
-              <Ionicons name="search-outline" size={size} color={color} />
+              <Ionicons name="book" size={size} color={color} />
             )
           }}
         />
@@ -69,10 +69,9 @@ const AppNavigator = () => {
           name="WishList"
           component={WishList}
           options={{
-            tabBarBadge: wishListItems.length,
             tabBarBadgeStyle:{backgroundColor:colors.red},
             tabBarIcon: ({ color, size }) => (
-              <MaterialCommunityIcons name="cards-heart-outline" size={size} color={color} />
+              <MaterialCommunityIcons name="brain" size={size} color={color} />
             )
           }}
         />

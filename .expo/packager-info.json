@@ -2,9 +2,9 @@
   "devToolsPort": 19002,
   "expoServerPort": 19000,
   "packagerPort": 19000,
-  "expoServerNgrokUrl": "https://2n-quv.goodsite.goodmental.exp.direct",
-  "packagerNgrokUrl": "https://2n-quv.goodsite.goodmental.exp.direct",
-  "ngrokPid": 18109,
+  "expoServerNgrokUrl": null,
+  "packagerNgrokUrl": null,
+  "ngrokPid": null,
   "packagerPid": null,
   "webpackServerPort": null
 }

@@ -26,7 +26,6 @@ export default function Home({ navigation }) {
         })
         setDatos([...lista])
     })
-
 },[])
   const renderItem = ({item})=>{
     return(
@@ -43,7 +42,7 @@ export default function Home({ navigation }) {
                                     }}
                                 >
                                     <Image
-
+                                        //añadir imagen
                                         style={{ width: "100%", height: 300 }}
                                         resizeMode="contain"
                                         onPress={()=>{navigation.navigate('PostScreen',{userId: item.id})}}
@@ -61,14 +60,10 @@ export default function Home({ navigation }) {
 }
 return (
     <KeyboardAvoidingView behavior="padding" style={{marginTop:35}}>
-
-       <FlatList data={datos} renderItem={renderItem} keyExtractor={x=>x.id} showsVerticalScrollIndicator={false}
-                 style={{marginTop:0, marginBottom:30}}
-       />
+       <FlatList data={datos} renderItem={renderItem} keyExtractor={x=>x.id} showsVerticalScrollIndicator={false} style={{marginTop:0, marginBottom:30}}/>
        {/* <View style={{marginTop:-40, flexDirection: 'row', justifyContent: 'space-evenly', flex:40}} >
             <Button  buttonStyle={{backgroundColor: '#00a680'}} title='Cuenta tu historia' onPress={()=>{navigation.navigate('CrearBlogScreen')}} />
-            <Button title="Ćrea psicologĆ­a" onPress={()=>{navigation.navigate('AreaPsicologia')}} buttonStyle={{backgroundColor: '#00a680',}}/>
-</View>*/}
+            <Button title="Ćrea psicologĆ­a" onPress={()=>{navigation.navigate('AreaPsicologia')}} buttonStyle={{backgroundColor: '#00a680',}}/> </View>*/}
     </KeyboardAvoidingView>
 );
 

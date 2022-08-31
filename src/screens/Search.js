@@ -1,141 +1,180 @@
-import React, { useState } from "react";
-import { StyleSheet, TextInput, View, FlatList, TouchableOpacity, Image, Text, ScrollView } from "react-native";
-// import { ScrollView } from 'react-native-virtualized-view';
-import { colors, spacing, typography } from "../theme";
-import { Ionicons, Entypo } from "@expo/vector-icons";
-import coursesData from "../data/coursesData";
-import AppText from "../components/AppText";
-import adjust from "../theme/adjust";
+import React, {useState,useEffect} from 'react';
+import {View, Text, Dimensions, StyleSheet, Image, FlatList, KeyboardAvoidingView, ScrollView} from 'react-native';
+import {db, auth} from '../../firebase2'
+import {Button, Card} from "react-native-elements";
+import {useNavigation} from "@react-navigation/core";
 
-const Search = ({ navigation }) => {
-  const [coursesItems, setCoursesItems] = useState(coursesData);
-  const setFilterCourses = text => {
-    const searchCourses = coursesData.filter(item => {
-      const userType = text.toLowerCase();
-      const courseTitle = item.title.toLowerCase();
-      return courseTitle.includes(userType)
-    })
-    setCoursesItems(searchCourses)
-  }
+const Articulos = ({ info }) => {
+    const [articulos, setArticulos] = useState([]);
+    const navigation = useNavigation()
+    const [blogsList, setBlogsList] = useState([]);
+    useEffect(()=>{
+        db.collection('Articulos').onSnapshot(querySnapshot=>{
+            const lista = []
+            querySnapshot.docs.forEach(doc=>{
+                const {name, description, tags, nickname} = doc.data()
+                lista.push({
+                    id:doc.id,name,description,tags, nickname
+                })
 
-  return (
-    <View style={styles.container}>
-      <ScrollView
-        showsVerticalScrollIndicator={false}
-        contentContainerStyle={{ paddingVertical: 35, paddingHorizontal: 20 }}
-      >
-        <View style={styles.inputContainer}>
-          <Ionicons style={styles.icon} name="md-search-outline"
-            size={22} color="black"/>
-          <TextInput onChangeText={text => setFilterCourses(text)} placeholder="Search your Course" />
-        </View>
+            })
+            setBlogsList([...lista])
+        })
 
-        {coursesItems.map((item) => {
-          return (
-            <TouchableOpacity key={item.id}
-            onPress={()=> navigation.navigate("CourseDetails",{item})}>
-              <View style={styles.coursesItems}>
-                <Image
-                  resizeMode="cover"
-                  style={styles.courseImg}
-                  source={item.image}
+    },[])
+    React.useEffect(()=>{
+        db.collection('correosPsicologos').onSnapshot(querySnapshot=>{
+            const docs = [];
+            querySnapshot.forEach(doc=>{
+                docs.push({
+                    id: doc.id,
+                    ...doc.data(),
+
+                })
+            })
+            setArticulos([...docs]);
+            console.log(docs)
+        })
+
+    },[])
+    function renderItem ({item}) {
+        return (
+            <View style={{backgroundColor: '#e1e1e1'}}>
+                <ScrollView showsVerticalScrollIndicator={false}>
+                    <View style={{backgroundColor: '#e1e1e1', marginTop:0, marginBottom:0}}>
+                        <Card containerStyle={{marginLeft:0, marginRight:0, marginTop:0, marginBottom:5, height:"100%",width:"100%", backgroundColor:'#f6f6f6'}}>
+                            <Card.Title onPress={()=>{navigation.navigate('ArticuloScreen',{userId: item.id})}}>{item.name}</Card.Title>
+                            <Card.Divider />
+                            <View
+                                style={{
+                                    position: "relative",
+                                    alignItems: "center"
+                                }}
+                            >
+                                <Image
+                                    style={{ width: 450, height: 200 }}
+                                    resizeMode="contain"
+                                />
+                                <Text style={{marginTop:10}}>{item.nickname}</Text>
+                                <Text style={{marginTop:10}}>{item.tags}</Text>
+                            </View>
+                        </Card>
+
+                    </View>
+
+                </ScrollView>
+
+            </View>
+        );
+    }
+    return(
+        <KeyboardAvoidingView
+            style={styles.container}
+            behavior="padding"
+        >
+
+            <View style={{padding: 30}}>
+                <FlatList
+                    showsVerticalScrollIndicator={false}
+                    showsHorizontalScrollIndicator={false}
+                    data={blogsList}
+                    renderItem={renderItem}
+                    keyExtractor={item => item.id}
                 />
-                <View style={styles.courseDetails}>
-                  <AppText preset="h5"
-                    style={styles.courseTitle} >
-                    {item.title}
+                <View>
+                    <View style={styles.fixToText}>
+                        {function(){
+                            if(articulos.length>0){
+                                console.log(articulos[0].correos)
+                                if(articulos[0].correos.includes(auth.currentUser.email)){
+                                    return(
+                                        <Button
+                                            title="Escribir artí­culo"
+                                            buttonStyle={{
+                                                backgroundColor: '#00ADC7',
 
-                  </AppText>
+                                            }}
+                                            onPress={() => navigation.navigate('EscribirArticulo')}
+                                        />
+                                    )
+                                }
+                            }
 
-                  <View
-                    style={{
-                      flexDirection: "row",
-                      justifyContent: "space-between",
-                      paddingTop: spacing[3],
-                      flexWrap: 'wrap'
-                    }}
-                  >
-                    <View style={{
-                      flexDirection: "row",
-                      alignItems: 'center',
-                    }}>
-                      <Entypo name="dot-single" size={20}
-                        color={colors.gray3} />
-                      <AppText
-                        style={{ color: colors.gray3, fontWeight: "500", fontSize: adjust(12) }}
-                      >
-                        {item.expert}
-                      </AppText>
+                        }()}
+
+
                     </View>
-                    <View style={{
-                      flexDirection: "row",
-                      alignItems: 'center',
-                    }}>
-                      <Entypo name="dot-single" size={20}
-                        color={colors.gray3} />
-                      <AppText
-                        style={{ color: colors.gray3, fontWeight: "500", fontSize: adjust(12) }}
-                      >
-                        {item.student} Students
-                      </AppText>
-                    </View>
-                  </View>
                 </View>
-              </View>
-            </TouchableOpacity>
-          );
-        })}
-      </ScrollView>
-    </View>
-  );
-};
 
-export default Search;
+            </View>
 
+        </KeyboardAvoidingView>
+    )
+
+
+}
+
+
+const deviceWidth = Math.round(Dimensions.get('window').width);
+const offset = 40;
+const radius = 20;
 const styles = StyleSheet.create({
-  container: {
-    flexGrow: 1,
-    backgroundColor: colors.light2,
-  },
-  inputContainer: {
-    backgroundColor: colors.white,
-    padding: 15,
-    borderRadius: 5,
-    borderWidth: 2,
-    borderColor: colors.light2,
-    marginBottom: 15,
-    flexDirection: "row",
-    alignItems: "center",
-  },
-  icon: {
-    color: colors.lightGray,
-    marginRight: 10,
-  },
-  coursesItems: {
-    width: "100%",
-    padding: 10,
-    backgroundColor: colors.white,
-    overflow: "hidden",
-    borderRadius: 10,
-    flexDirection: "row",
-    marginBottom: 15,
-  },
-  courseImg: {
-    alignSelf: "flex-start",
-    width: adjust(100),
-    height: adjust(100),
-    borderRadius: 10,
-    overflow: "hidden",
-  },
-  courseDetails: {
-    paddingHorizontal: 10,
-    justifyContent: "space-between",
-    flex: 1,
-  },
-  courseTitle: {
-    color: colors.black,
-    marginTop: spacing[4],
-    fontSize: adjust(15),
-    // maxWidth: adjust(220),
-  }
+    container: {
+        width: deviceWidth - 20,
+        alignItems: 'center',
+        marginTop: 25,
+    },
+    button: {
+        margin: 2,
+    },
+    fixToText: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+    },
+    indicator: {
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    cardContainer: {
+        width: deviceWidth - offset,
+        backgroundColor: '#fff',
+        height: 230,
+        borderRadius: radius,
+        marginBottom: 20,
+
+        shadowColor: '#000',
+        shadowOffset: {
+            width: 5,
+            height: 5,
+        },
+        shadowOpacity: 0.75,
+        shadowRadius: 5,
+        elevation: 10,
+    },
+    imageStyle: {
+        height: 130,
+        width: deviceWidth - offset,
+        borderTopLeftRadius: radius,
+        borderTopRightRadius: radius,
+        opacity: 0.9,
+        alignContent: 'center',
+        alignSelf: 'center',
+    },
+    titleStyle: {
+        fontSize: 20,
+        fontWeight: '800',
+    },
+    categoryStyle: {
+        fontWeight: '200',
+    },
+    infoStyle: {
+        marginHorizontal: 10,
+        marginVertical: 5,
+    },
+    iconLabelStyle: {
+        flexDirection: 'row',
+        marginTop: 10,
+    },
 });
+
+export default Articulos;

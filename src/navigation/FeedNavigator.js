@@ -14,6 +14,8 @@ import MyOrder from "../screens/MyOrder";
 import CourseVideo from "../screens/CourseVideo";
 import Checkout from "../screens/Checkout";
 import PostScreen from '../screens/PostScreen'
+import EscribirArticulo from "../screens/EscribirArticulo";
+import DescripcionPsicologos from "../screens/DescripcionPsicologos";
 
 const Stack = createNativeStackNavigator();
 
@@ -37,6 +39,10 @@ export default function FeedNavigator() {
       <Stack.Screen name="CourseVideo" component={CourseVideo} />
       <Stack.Screen name="Checkout" component={Checkout} />
       <Stack.Screen name="PostScreen" component={PostScreen}/>
+      <Stack.Screen name="EscribirArticulo" component={EscribirArticulo}/>
+      <Stack.Screen name="DescripcionPsicologos" component={DescripcionPsicologos}/>
+
+
     </Stack.Navigator>
   );
 }
