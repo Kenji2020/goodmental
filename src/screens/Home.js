@@ -1,8 +1,8 @@
-import React from "react";
-import {View,StyleSheet,FlatList, TouchableOpacity,Image} from "react-native";
+import React, {useEffect, useState} from "react";
+import {View,StyleSheet,FlatList, TouchableOpacity,Image, Text, KeyboardAvoidingView} from "react-native";
 import { ScrollView } from 'react-native-virtualized-view';
 import { Entypo } from "@expo/vector-icons";
-
+import { Input, Button,Card } from "react-native-elements";
 import AppText from "../components/AppText";
 import categoryData from "../data/catogoryData";
 import coursesData from "../data/coursesData";
@@ -11,164 +11,67 @@ import { spacing } from "./../theme/spacing";
 import adjust from "../theme/adjust";
 import SingleCourse from "../components/SingleCourse";
 import HomeSlider from "../components/HomeSlider";
-
+import {db} from '../../firebase2'
 export default function Home({ navigation }) {
+  const [datos, setDatos] = useState([])
+  useEffect(()=>{
+    db.collection('Inventario').onSnapshot(querySnapshot=>{
+        const lista = []
+        querySnapshot.docs.forEach(doc=>{
+            const {name, description, tags, nickname} = doc.data()
+            lista.push({
+                id:doc.id,name,description,tags, nickname
+            })
 
-  function categoryArea() {
-    return (
-      <View style={[styles.container,{marginTop:30}]}>
-        <View style={styles.title}>
-          <AppText preset="h4" style={{ color: colors.black }}>
-            Catagory
-          </AppText>
-          <TouchableOpacity onPress={() => navigation.navigate("AllCategory")}>
-            <AppText preset="h4" style={{ color: colors.primary, fontSize: 16 }}>
-              See all
-            </AppText>
-          </TouchableOpacity>
+        })
+        setDatos([...lista])
+    })
+
+},[])
+  const renderItem = ({item})=>{
+    return(
+        <View style={{backgroundColor: '#e1e1e1'}}>
+            <ScrollView showsVerticalScrollIndicator={false}>
+                        <View style={{backgroundColor: '#e1e1e1', marginTop:0, marginBottom:0}}>
+                            <Card containerStyle={{marginLeft:0, marginRight:0, marginTop:0, marginBottom:0, height:400, backgroundColor:'#f6f6f6'}}>
+                                <Card.Title onPress={()=>{navigation.navigate('PostScreen',{userId: item.id})}}>{item.name}</Card.Title>
+                                <Card.Divider />
+                                <View
+                                    style={{
+                                        position: "relative",
+                                        alignItems: "center"
+                                    }}
+                                >
+                                    <Image
+
+                                        style={{ width: "100%", height: 300 }}
+                                        resizeMode="contain"
+                                        onPress={()=>{navigation.navigate('PostScreen',{userId: item.id})}}
+                                    />
+                                    <Text style={{marginTop:10}}>{item.nickname}</Text>
+                                </View>
+                            </Card>
+
+                        </View>
+
+            </ScrollView>
+
         </View>
-        <View>
-          <FlatList
-            data={categoryData.slice(0, 5)}
-            keyExtractor={(item) => item.id.toString()}
-            contentContainerStyle={{ flexDirection: "row" }}
-            horizontal
-            showsHorizontalScrollIndicator={false}
-            renderItem={({ item }) => {
-              return (
-                  <View
-                    style={{
-                      width: 130,
-                      paddingVertical: 15,
-                      paddingHorizontal: 15,
-                      margin: 5,
-                      backgroundColor: colors.white,
-                    }}
-                  >
-                    {item.icon}
-                    <AppText
-                      preset="h5"
-                      style={{ color: colors.black, marginTop: spacing[4] }}
-                    >
-                      {item.title}
-                    </AppText>
-                  </View>
-              );
-            }}
-          />
+    )
+}
+return (
+    <KeyboardAvoidingView behavior="padding" style={{marginTop:35}}>
+
+       <FlatList data={datos} renderItem={renderItem} keyExtractor={x=>x.id} showsVerticalScrollIndicator={false}
+                 style={{marginTop:0, marginBottom:40}}
+       />
+        <View style={{marginTop:-40, flexDirection: 'row', justifyContent: 'space-evenly', flex:40}} >
+            <Button  buttonStyle={{backgroundColor: '#00a680'}} title='Cuenta tu historia' onPress={()=>{navigation.navigate('CrearBlogScreen')}} />
+            <Button title="Ćrea psicologĆ­a" onPress={()=>{navigation.navigate('AreaPsicologia')}} buttonStyle={{backgroundColor: '#00a680',}}/>
         </View>
-      </View>
-    );
-  }
+    </KeyboardAvoidingView>
+);
 
-  function curseAreaStart() {
-    return (
-      <View style={[styles.container, { marginTop: spacing[12] }]}>
-        <View style={styles.title}>
-          <AppText preset="h4" style={{ color: colors.black }}>
-            Top Courses
-          </AppText>
-          <TouchableOpacity onPress={() => navigation.navigate('AllCourses')}>
-            <AppText preset="h4" style={{ color: colors.primary, fontSize: 16 }}>
-              See all
-            </AppText>
-          </TouchableOpacity>
-        </View>
-        <View>
-          <FlatList
-            data={coursesData.slice(0, 4)}
-            keyExtractor={(item) => item.id.toString()}
-            horizontal
-            showsHorizontalScrollIndicator={false}
-            renderItem={({ item, index }) => {
-              return <SingleCourse item={item} verticalItems={false} />;
-            }}
-          />
-        </View>
-      </View>
-    );
-  }
-
-  const PopularCourse = () => {
-    return (
-      <View style={[styles.container, { marginTop: spacing[12] }]}>
-        <View style={styles.title}>
-          <AppText preset="h4" style={{ color: colors.black }}>
-            Popurlar Courses
-          </AppText>
-        </View>
-        <View>
-          {coursesData.slice(0, 4).map((item) => {
-            return (
-              <TouchableOpacity onPress={() => navigation.navigate('CourseDetails', { item })} key={item.id}>
-                <View style={styles.popularCourseItem}>
-                  <Image
-                    resizeMode="cover"
-                    style={styles.popularImg}
-                    source={item.image}
-                  />
-                  <View style={styles.popularDetails}>
-                    <AppText preset="h5"
-                      style={styles.popularTitle} >
-                      {item.title}
-                    </AppText>
-
-                    <View
-                      style={{
-                        flexDirection: "row",
-                        justifyContent: "space-between",
-                        paddingTop: spacing[3],
-                        flexWrap: 'wrap'
-                      }}
-                    >
-                      <View style={{flexDirection:"row",alignItems:'center'}}>
-                        <Entypo name="dot-single" size={20}
-                          color={colors.gray3} />
-                        <AppText style={{ color: colors.gray3, fontWeight: "500", fontSize: adjust(12) }}>
-                          {item.expert}
-                        </AppText>
-                      </View>
-                      <View style={{flexDirection:"row",alignItems:'center'}}>
-                        <Entypo name="dot-single" size={20}
-                          color={colors.gray3} />
-                        <AppText style={{ color: colors.gray3, fontWeight: "500", fontSize: adjust(12)}}>
-                          {item.student} Students
-                        </AppText>
-                      </View>
-                    </View>
-                  </View>
-                </View>
-              </TouchableOpacity>
-            );
-          })}
-        </View>
-      </View>
-    );
-  };
-
-  return (
-    <ScrollView
-      style={{flexGrow: 1,backgroundColor: colors.light}}
-      contentContainerStyle={{ paddingBottom: 30}}
-      showsVerticalScrollIndicator={false}
-    >
-      {/* slider course start */}
-      <HomeSlider/>
-      {/* slider course end */}
-
-      {/* category start */}
-      {categoryArea()}
-      {/* category end */}
-
-      {/* course start */}
-      {curseAreaStart()}
-      {/* course end */}
-
-      {/* course start */}
-      <PopularCourse />
-      {/* course end */}
-    </ScrollView>
-  );
 }
 
 const styles = StyleSheet.create({

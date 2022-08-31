@@ -29,7 +29,7 @@ export default function VerifyPhoneNumber({ navigation }) {
                 fontFamily: typography.regular
               }}
               placeholderTextColor={colors.black}
-              initialCountry={"us"}
+              initialCountry={"cl"}
             />
           </View>
           <AppButton
