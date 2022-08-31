@@ -50,7 +50,6 @@ export default function Profile({ navigation }) {
           <Image source={require('../assets/images/user/user.png')} />
           <TouchableOpacity
             onPress={() => navigation.navigate('EditProfile')}>
-            <Image style={styles.editImg} source={require('../assets/images/user/edit.png')} />
           </TouchableOpacity>
           <View style={styles.userInfo}>
             <AppText style={styles.userName} preset='h4'>{user?.displayName}</AppText>
@@ -59,15 +58,14 @@ export default function Profile({ navigation }) {
         </View>
 
         <View style={styles.listItems}>
-          <ListItem onPress={()=> navigation.navigate('EditProfile')} icon={<Account />} title="Account Setting" color="#2B4EFF" arrow={true} />
 
-          <ListItem onPress={()=> navigation.navigate('PaymentMethod')} icon={<CreditCart />} title="payment Method" color="#F2277E" arrow={true}/>
+          <ListItem onPress={()=> navigation.navigate('PaymentMethod')} icon={<CreditCart />} title="Solicitar cuenta de psicólog@" color="#F2277E" arrow={true}/>
 
-          <ListItem onPress={()=> navigation.navigate('MyOrder')} icon={<Ionicons name="document-text-outline" size={18} color={colors.white} />} title="My Order" color="#3D3DCC" arrow={true} />
+          <ListItem onPress={()=> navigation.navigate('Search')} icon={<Ionicons name="document-text-outline" size={18} color={colors.white} />} title="Artículos" color="#3D3DCC" arrow={true} />
 
-          <ListItem onPress={()=> navigation.navigate('WishList')} icon={<Heart />} title="Like" color="#33ECE9" arrow={true} />
+          <ListItem onPress={()=> navigation.navigate('WishList')} icon={<Heart />} title="Psicólog@s" color="#33ECE9" arrow={true} />
 
-          <ListItem onPress={handleSignOut} icon={<Logout />} title="Sign Out" color="#FFC226" arrow={true} />
+          <ListItem onPress={handleSignOut} icon={<Logout />} title="Cerrar sesión" color="#FFC226" arrow={true} />
         </View>
       </ScrollView>
     </Screen>
@@ -103,5 +101,7 @@ const styles = StyleSheet.create({
   },
   listItems: {
     paddingVertical: 35,
+    marginRight:30,
+    marginLeft: 30
   }
 })
