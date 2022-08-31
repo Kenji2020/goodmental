@@ -9,6 +9,7 @@ import Cart from './../screens/Cart';
 import CartButton from './CartButton';
 import WishList from './../screens/WishList';
 import Profile from "../screens/Profile";
+import CrearBlogScreen from "../screens/BlogScreen";
 import { colors } from "../theme";
 
 
@@ -49,12 +50,12 @@ const AppNavigator = () => {
 
 
         <Tab.Screen
-          name="Cart"
-          component={Cart}
+          name="CrearBlogScreen"
+          component={CrearBlogScreen}
 
           options={({ navigation }) => ({
             tabBarButton: () => (
-              <CartButton onPress={() => navigation.navigate('Cart')} />
+              <CartButton onPress={() => navigation.navigate('CrearBlogScreen')} />
             ),
             tabBarIcon: ({ color, size }) => (
               <MaterialCommunityIcons name="shopping-outline" size={size} color={color} />
