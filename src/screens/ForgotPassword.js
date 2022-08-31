@@ -1,32 +1,46 @@
 import { View, Text, StyleSheet } from "react-native";
-import React from "react";
-
+import React, { useState } from "react";
 import Screen from "../components/Screen";
 import { colors } from "../theme/colors";
 import AppTextInput from "../components/AppTextInput";
 import AppButton from "../components/AppButton";
 import Header from "./../components/Header";
 import AppText from "../components/AppText";
+import {auth, sendPasswordResetEmail} from '../firebase/firebase'
 
 export default function ForgotPassword({ navigation }) {
+  const [text, setText] = useState('')
+  const forgotPassword = (Email) => {
+
+    console.log("reset email sent to " + Email);
+    sendPasswordResetEmail(auth, Email, null)
+        .then(() => {
+            alert("Email enviado a " + Email + " revise carpeta de spam (es posible que el email esté en inglés).");
+        })
+        .catch(function (e) { 
+            alert('Error, ingrese el email tal cual lo es e inténtelo nuevamente.');
+        });
+};
   return (
     <>
       <Header
         style={{ backgroundColor: colors.light }}
-        title="Forgot Password"
+        title="Reinicio de contraseña"
         onPress={() => navigation.goBack()}
       />
 
       <Screen style={styles.container}>
         <View style={styles.passwordWrapper}>
           <AppText style={styles.text}>
-            Please enter your email address. you will reveive a link to create a
-            new password via email.
+            Por favor ingrese su correo electrónico
           </AppText>
-          <AppTextInput placeholderText="Email Adress" />
+          <AppTextInput placeholderText="Correo electrónico" onChangeText={(text)=>setText(text)} value={text}/>
           <AppButton
-            onPress={() => navigation.navigate("ResetPassword")}
-            title="Send"
+            onPress={() => {
+              console.log(text.toLowerCase())
+                forgotPassword(text.toLowerCase())
+            }}
+            title="Enviar"
           />
         </View>
       </Screen>

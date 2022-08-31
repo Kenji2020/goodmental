@@ -13,14 +13,14 @@ export default function VerifyPhoneNumber({ navigation }) {
     <>
       <Header
         style={{ backgroundColor: colors.light }}
-        title="Verify Phone Number"
+        title="Verificar número de teléfono"
         onPress={() => navigation.goBack()}
       />
 
       <Screen style={styles.container}>
         <View style={styles.verifyNumberWrapper}>
           <AppText style={styles.text}>
-            You have sent you an SMS with a code to number +12 334 566 778
+              Te enviaremos un SMS
           </AppText>
           <View style={styles.phoneInputBox}>
             <PhoneInput
