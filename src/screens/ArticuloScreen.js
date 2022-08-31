@@ -17,7 +17,7 @@ import {AntDesign} from "@expo/vector-icons";
 // Icons
 
 import {Feather, FontAwesome} from '@expo/vector-icons'
-import {auth, db} from '../firebase'
+import {auth, db} from '../../firebase2'
 import {Button} from 'react-native-elements'
 import {useNavigation} from "@react-navigation/native";
 
@@ -135,7 +135,9 @@ const ArticuloScreen = (props) => {
             <View style={{flex: 1, backgroundColor: '#fff'}}>
                 <View>
                     <SharedElement>
-                        <Image source={require('../assets/icon.png')} style={{
+                        <Image 
+                         
+                         style={{
                             width: '100%',
                             height: height - 450,
                             borderBottomLeftRadius: 10,

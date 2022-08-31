@@ -16,7 +16,7 @@ import Checkout from "../screens/Checkout";
 import PostScreen from '../screens/PostScreen'
 import EscribirArticulo from "../screens/EscribirArticulo";
 import DescripcionPsicologos from "../screens/DescripcionPsicologos";
-
+import ArticuloScreen from "../screens/ArticuloScreen";
 const Stack = createNativeStackNavigator();
 
 export default function FeedNavigator() {
@@ -41,7 +41,7 @@ export default function FeedNavigator() {
       <Stack.Screen name="PostScreen" component={PostScreen}/>
       <Stack.Screen name="EscribirArticulo" component={EscribirArticulo}/>
       <Stack.Screen name="DescripcionPsicologos" component={DescripcionPsicologos}/>
-
+      <Stack.Screen name="ArticuloScreen" component={ArticuloScreen}/>
 
     </Stack.Navigator>
   );
