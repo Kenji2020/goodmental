@@ -63,12 +63,12 @@ return (
     <KeyboardAvoidingView behavior="padding" style={{marginTop:35}}>
 
        <FlatList data={datos} renderItem={renderItem} keyExtractor={x=>x.id} showsVerticalScrollIndicator={false}
-                 style={{marginTop:0, marginBottom:40}}
+                 style={{marginTop:0, marginBottom:30}}
        />
-        <View style={{marginTop:-40, flexDirection: 'row', justifyContent: 'space-evenly', flex:40}} >
+       {/* <View style={{marginTop:-40, flexDirection: 'row', justifyContent: 'space-evenly', flex:40}} >
             <Button  buttonStyle={{backgroundColor: '#00a680'}} title='Cuenta tu historia' onPress={()=>{navigation.navigate('CrearBlogScreen')}} />
             <Button title="Ćrea psicologĆ­a" onPress={()=>{navigation.navigate('AreaPsicologia')}} buttonStyle={{backgroundColor: '#00a680',}}/>
-        </View>
+</View>*/}
     </KeyboardAvoidingView>
 );
 

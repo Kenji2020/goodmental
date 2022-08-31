@@ -11,11 +11,8 @@ function CartButton({ onPress }) {
   return (
     <TouchableOpacity onPress={onPress}>
       <View style={styles.container}>
-        <MaterialCommunityIcons name="shopping-outline"
+        <MaterialCommunityIcons name="plus"
           size={30} color={colors.white} />
-        <View style={styles.cartItem}>
-            <Text style={styles.text}>{cartItems.length}</Text>
-        </View>
       </View>
     </TouchableOpacity>
   );

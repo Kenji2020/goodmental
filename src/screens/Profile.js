@@ -21,11 +21,11 @@ export default function Profile({ navigation }) {
   const handleSignOut = () => {
 
     Alert.alert(
-      "Are you sure",
-      "You want to sign out",
+      "¿Segur@ que quieres cerrar sesión?",
+      "🔒",
       [
         {
-          text: "Cancel",
+          text: "Cancelar",
           // onPress: () => console.log("Cancel Pressed"),
           style: "cancel"
         },
