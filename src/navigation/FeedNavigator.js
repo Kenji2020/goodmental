@@ -13,6 +13,7 @@ import AllCategory from "../screens/AllCategory";
 import MyOrder from "../screens/MyOrder";
 import CourseVideo from "../screens/CourseVideo";
 import Checkout from "../screens/Checkout";
+import PostScreen from '../screens/PostScreen'
 
 const Stack = createNativeStackNavigator();
 
@@ -35,6 +36,7 @@ export default function FeedNavigator() {
       <Stack.Screen name="MyOrder" component={MyOrder} />
       <Stack.Screen name="CourseVideo" component={CourseVideo} />
       <Stack.Screen name="Checkout" component={Checkout} />
+      <Stack.Screen name="PostScreen" component={PostScreen}/>
     </Stack.Navigator>
   );
 }

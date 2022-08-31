@@ -2,7 +2,7 @@ import React, {useState, useRef} from "react";
 import {
     View, StyleSheet, TextInput, ScrollView, KeyboardAvoidingView, Text
 } from "react-native";
-import {db} from "../../firebase2";
+import {db,auth} from "../../firebase2";
 import {Button} from 'react-native-elements'
 import styles from './style'
 import {arrayUnion, updateDoc} from "firebase/firestore";
@@ -114,6 +114,7 @@ const CrearBlogScreen = (props) => {
                             () => {
                                 saveNewUser()
                                 props.navigation.navigate("Home")
+                                
                             }
                         } title="Publicar"/>
 
