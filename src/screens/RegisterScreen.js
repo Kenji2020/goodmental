@@ -60,7 +60,7 @@ export default function RegisterScreen({ navigation }) {
   }
   return (
     <>
-      <Header title="Register" onPress={() => navigation.goBack()} />
+      <Header title="Registro" onPress={() => navigation.goBack()} />
 
       <KeyboardAwareScrollView
         contentContainerStyle={{

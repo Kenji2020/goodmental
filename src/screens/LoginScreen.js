@@ -27,7 +27,7 @@ export default function LoginScreen({ navigation }) {
 
   return (
     <>
-      <Header title="Login" onPress={() => navigation.goBack()} />
+      <Header title="Iniciar sesión" onPress={() => navigation.goBack()} />
 
       <KeyboardAwareScrollView
         contentContainerStyle={{
