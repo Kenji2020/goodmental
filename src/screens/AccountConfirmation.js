@@ -5,11 +5,11 @@ export default function AccountConfirmation() {
   return (
     <>
       <AppConfirmation
-        headerTitle="Account"
+        headerTitle="Confirmacion de"
         Link="Home"
-        buttonTitle="Explore Educal"
-        title="Account Created"
-        subtitle={"Your Account had beed created \nsucessfully"}
+        buttonTitle="Explorar Goodmind - share and talk"
+        title=""
+        subtitle={""}
       />
     </>
   );

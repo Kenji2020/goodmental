@@ -42,7 +42,7 @@ const Articulos = ({ info }) => {
             <View style={{backgroundColor: '#e1e1e1'}}>
                 <ScrollView showsVerticalScrollIndicator={false}>
                     <View style={{backgroundColor: '#e1e1e1', marginTop:0, marginBottom:0}}>
-                        <Card containerStyle={{marginLeft:0, marginRight:0, marginTop:0, marginBottom:5, height:"100%",width:"100%", backgroundColor:'#f6f6f6'}}>
+                        <Card containerStyle={{marginLeft:0, marginRight:0, marginTop:0, marginBottom:0, height:"100%",width:"100%", backgroundColor:'#f6f6f6'}}>
                             <Card.Title onPress={()=>{navigation.navigate('ArticuloScreen',{userId: item.id})}}>{item.name}</Card.Title>
                             <Card.Divider />
                             <View
@@ -73,7 +73,7 @@ const Articulos = ({ info }) => {
             behavior="padding"
         >
 
-            <View style={{padding: 30}}>
+            <View>
                 <FlatList
                     showsVerticalScrollIndicator={false}
                     showsHorizontalScrollIndicator={false}
@@ -120,7 +120,7 @@ const offset = 40;
 const radius = 20;
 const styles = StyleSheet.create({
     container: {
-        width: deviceWidth - 20,
+        width: deviceWidth,
         alignItems: 'center',
         marginTop: 25,
     },

@@ -62,7 +62,7 @@ const AreaPsicologia = ({ info }) => {
             behavior="padding"
         >
 
-            <View style={{padding: 30}}>
+            <View>
                 <FlatList
                     data={blogsList}
                     renderItem={renderItem}
@@ -82,7 +82,7 @@ const offset = 40;
 const radius = 20;
 const styles = StyleSheet.create({
     container: {
-        width: deviceWidth - 20,
+        width: deviceWidth,
         alignItems: 'center',
         marginTop: 25,
     },

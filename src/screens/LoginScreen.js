@@ -59,7 +59,7 @@ export default function LoginScreen({ navigation }) {
                     email: user.email,
                     uid: user.uid,
                   }))
-                  navigation.navigate('VerifyPhoneNumber')
+                  navigation.navigate('AccountConfirmation')
                 })
                 .catch((error) => {
                   const errorMessage = error.message;

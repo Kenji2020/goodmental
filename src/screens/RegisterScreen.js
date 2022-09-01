@@ -50,7 +50,7 @@ export default function RegisterScreen({ navigation }) {
         }).catch((error) => {
 
         });
-        navigation.navigate('VerifyPhoneNumber')
+        navigation.navigate('AccountConfirmation')
       })
       .catch((error) => {
         const errorCode = error.code;

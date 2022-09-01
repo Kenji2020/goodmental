@@ -14,7 +14,7 @@ export default function WelcomeScreen({ navigation }) {
       <Image style={styles.logo} source={require('../assets/images/logo/logo.png')} />
       <View style={styles.detailsContainer}>
         <View style={styles.textContainer}>
-          <AppText preset="h2" style={styles.headingText}>Bienvenido a GoodMental</AppText>
+          <AppText preset="h2" style={styles.headingText}>Bienvenid@ a Goodmind </AppText>
           <AppText preset="default" style={styles.paragraphText}>{'La aplicación donde puedes contar\nlo que callas'}</AppText>
         </View>
         <AppButton title="Empezar"

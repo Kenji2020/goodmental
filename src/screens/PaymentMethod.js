@@ -6,6 +6,7 @@ import { colors } from '../theme';
 import AppText from '../components/AppText';
 import AppButton from '../components/AppButton';
 import Header from '../components/Header';
+import { Platform } from 'react-native';
 
 const PaymentMethod = ({navigation,route}) => {
   const params = route.params?.name;
@@ -17,18 +18,15 @@ const PaymentMethod = ({navigation,route}) => {
         title="Solicitar cuenta de psicólog@"
         onPress={params === "checkout" ?  () => navigation.goBack() : () => navigation.navigate("Profile") }
       />
-
     <Screen style={{ backgroundColor: colors.light }}>
       <AppText style={styles.userName}>Para obtener una cuenta de psicólog@ debe contactar con el siguiente correo presentando su curriculum y título:
         goodmental@gmail.com
-        además de pagar una suscripcion de $5.000 pesos mensual
+        además de pagar una subscripcion de $5.000 pesos mensual
       </AppText>
     </Screen>
 
     </>
-  )
-}
-
+  )}
 export default PaymentMethod;
 
 const styles = StyleSheet.create({
@@ -68,5 +66,4 @@ const styles = StyleSheet.create({
     paddingVertical: 35,
     marginRight:30,
     marginLeft: 30
-  }
-})
+  }})

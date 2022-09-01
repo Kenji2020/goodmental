@@ -43,11 +43,11 @@ export default function Profile({ navigation }) {
   }
   return (
     <>
-    <Header title="Profile" goBack={false} style={{backgroundColor:colors.light}} />
+    <Header title="Perfil" goBack={false} style={{backgroundColor:colors.light}} />
     <Screen style={styles.container}>
       <ScrollView >
         <View style={styles.userProfileBox}>
-          <Image source={require('../assets/images/user/user.png')} />
+          {/*<Image source={require('../assets/images/user/user.png')} />*/}
           <TouchableOpacity
             onPress={() => navigation.navigate('EditProfile')}>
           </TouchableOpacity>
@@ -101,7 +101,7 @@ const styles = StyleSheet.create({
   },
   listItems: {
     paddingVertical: 35,
-    marginRight:30,
-    marginLeft: 30
+    marginRight:10,
+    marginLeft: 10
   }
 })

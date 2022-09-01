@@ -30,7 +30,7 @@ export default function AppConfirmation({ headerTitle, Link, buttonTitle, title,
     <>
       <Header
         style={{ backgroundColor: colors.light }}
-        title={`${headerTitle} Confirmation`} 
+        title={`${headerTitle} Cuenta`} 
         onPress={() => navigation.goBack()}
       />
       <Screen style={styles.container}>
