@@ -44,7 +44,6 @@ const AreaPsicologia = ({ info }) => {
                                 <Text style={{marginTop:10}}>{item.numero}</Text>
                                 <Text style={{marginTop:10}}>{item.correo}</Text>
                                 <Text style={{marginTop:10,fontWeight: "bold"}} onPress={()=> navigation.navigate('DescripcionPsicologos',{userId: item.id})}>Leer más...</Text>
-
                             </View>
                         </Card>
 

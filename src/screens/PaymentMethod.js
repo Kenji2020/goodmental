@@ -19,8 +19,8 @@ const PaymentMethod = ({navigation,route}) => {
         onPress={params === "checkout" ?  () => navigation.goBack() : () => navigation.navigate("Profile") }
       />
     <Screen style={{ backgroundColor: colors.light }}>
-      <AppText style={styles.userName}>Para obtener una cuenta de psicólog@ debe contactar con el siguiente correo presentando su curriculum y título:
-        goodmental@gmail.com
+      <AppText style={styles.userProfileBox}>Para obtener una cuenta de psicólog@ debe contactar con el siguiente correo presentando su curriculum y título universitario:
+        goodmindchile@gmail.com 
         además de pagar una subscripcion de $5.000 pesos mensual
       </AppText>
     </Screen>

@@ -12,7 +12,14 @@ import adjust from "../theme/adjust";
 import SingleCourse from "../components/SingleCourse";
 import HomeSlider from "../components/HomeSlider";
 import {db} from '../../firebase2'
+import {auth} from '../firebase/firebase'
+import { useDispatch, useSelector } from 'react-redux';
+
+import { isConfirmation, login, selectUser } from '../redux/features/userSlice';
+
 export default function Home({ navigation }) {
+  const user = useSelector(selectUser);
+
   const [datos, setDatos] = useState([])
   useEffect(()=>{
     db.collection('Inventario').onSnapshot(querySnapshot=>{

@@ -6,6 +6,8 @@ import {db,auth} from "../../firebase2";
 import {Button} from 'react-native-elements'
 import styles from './style'
 import {arrayUnion, updateDoc} from "firebase/firestore";
+import { Form } from "formik";
+import { RefreshControl } from "react-native-gesture-handler";
 
 const CrearBlogScreen = (props) => {
     const initalState = {
@@ -113,6 +115,7 @@ const CrearBlogScreen = (props) => {
                         onPress={
                             () => {
                                 saveNewUser()
+
                                 props.navigation.navigate("Home")
                                 
                             }
