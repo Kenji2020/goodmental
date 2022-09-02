@@ -20,6 +20,8 @@ const ChatPsicologo = (props) => {
         correo: "",
         numero: "",
         tipoDeConsulta: "",
+        especialidad: "",
+        precio:"",
     };
     const [user, setUser] = useState(initialState);
     const [loading, setLoading] = useState(true);
@@ -73,18 +75,25 @@ const ChatPsicologo = (props) => {
                 </SharedElement>
 
                 <Text style={{fontSize: 14, lineHeight: 28, textAlign: 'justify', opacity: 0.5}}>
-                    {user.motivation}
+                    {user.description}
                 </Text>
                 <SharedElement>
-                    <Text style={{color: 'black', fontSize: 15,marginTop:10}}>{user.numero}</Text>
+                    <Text style={{color: 'black', fontSize: 15,marginTop:10}}>Número: {user.numero}</Text>
                 </SharedElement>
                 <SharedElement>
-                    <Text style={{color: 'black', fontSize: 15,marginTop:10}}>{user.correo}</Text>
+                    <Text style={{color: 'black', fontSize: 15,marginTop:10}}>Correo: {user.correo}</Text>
+                </SharedElement>
+                <SharedElement>
+                    <Text style={{color: 'black', fontSize: 15,marginTop:10}}>Precio: {user.precio}</Text>
                 </SharedElement>
 
                 <SharedElement>
-                    <Text style={{color: 'black', fontSize: 15, marginBottom: 30, marginTop:10}}>Tipo de
+                    <Text style={{color: 'black', fontSize: 15, marginTop:10}}>Tipo de
                         consulta: {user.tipoDeConsulta}</Text>
+                </SharedElement>
+                <SharedElement>
+                    <Text style={{color: 'black', fontSize: 15, marginBottom: 30, marginTop:10}}>Tipo de
+                        especialidad: {user.especialidad}</Text>
                 </SharedElement>
                 <View style={{flexDirection: 'row', alignItems: 'center', marginTop: 14, marginBottom: 10}}>
                     <View style={{

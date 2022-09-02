@@ -11,9 +11,9 @@ const AreaPsicologia = ({ info }) => {
         db.collection('Psicólogos').onSnapshot(querySnapshot=>{
             const lista = []
             querySnapshot.docs.forEach(doc=>{
-                const {name, description, tags,correo,image,numero,tipoDeConsulta} = doc.data()
+                const {name, description, tags,correo,image,numero,tipoDeConsulta, especialidad,precio} = doc.data()
                 lista.push({
-                    id:doc.id,name,description,tags,correo,image,numero,tipoDeConsulta
+                    id:doc.id,name,description,tags,correo,image,numero,tipoDeConsulta,especialidad,precio 
                 })
             })
             setBlogsList([...lista])
@@ -40,9 +40,12 @@ const AreaPsicologia = ({ info }) => {
                                     source={image}
                                 />
                                 <Text style={{marginTop:10}}>{item.nickname}</Text>
-                                <Text style={{marginTop:10}}>{item.tipoDeConsulta}</Text>
-                                <Text style={{marginTop:10}}>{item.numero}</Text>
-                                <Text style={{marginTop:10}}>{item.correo}</Text>
+                                <Text style={{marginTop:10}}>Tipo de consulta: {item.tipoDeConsulta}</Text>
+                                <Text style={{marginTop:10}}>Número: {item.numero}</Text>
+                                <Text style={{marginTop:10}}>Correo: {item.correo}</Text>
+                                <Text style={{marginTop:10}}>Especialidad: {item.especialidad}</Text>
+                                <Text style={{marginTop:10}}>Precio por sesión: {item.precio}</Text>
+
                                 <Text style={{marginTop:10,fontWeight: "bold"}} onPress={()=> navigation.navigate('DescripcionPsicologos',{userId: item.id})}>Leer más...</Text>
                             </View>
                         </Card>
