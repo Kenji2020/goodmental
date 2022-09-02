@@ -74,14 +74,6 @@ export default function LoginScreen({ navigation }) {
             <AppFormField placeholderText="Contraseña" name="password" secureTextEntry />
 
             <View style={styles.userCheckMeta}>
-              <View style={styles.checkboxContainer}>
-                <Checkbox
-                  disabled={false}
-                  value={toggleCheckBox}
-                  onValueChange={(newValue) => setToggleCheckBox(newValue)}
-                />
-                <AppText style={styles.label}>Recordarme</AppText>
-              </View>
               <TouchableOpacity onPress={() => navigation.navigate("ForgotPassword")} >
                 <AppText style={styles.forgotPass}>¿Olvidaste tu contraseña?</AppText>
               </TouchableOpacity>

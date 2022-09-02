@@ -16,7 +16,7 @@ import {auth} from '../firebase/firebase'
 import { useDispatch, useSelector } from 'react-redux';
 
 import { isConfirmation, login, selectUser } from '../redux/features/userSlice';
-
+import image from '../assets/brain.png'
 export default function Home({ navigation }) {
   const user = useSelector(selectUser);
 
@@ -50,6 +50,7 @@ export default function Home({ navigation }) {
                                 >
                                     <Image
                                         //añadir imagen
+                                        source={image}
                                         style={{ width: "100%", height: 300 }}
                                         resizeMode="contain"
                                         onPress={()=>{navigation.navigate('PostScreen',{userId: item.id})}}

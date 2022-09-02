@@ -3,7 +3,7 @@ import {View, Text, Dimensions, StyleSheet, Image, FlatList, KeyboardAvoidingVie
 import {db, auth} from '../../firebase2'
 import {Button, Card} from "react-native-elements";
 import {useNavigation} from "@react-navigation/core";
-
+import image from '../assets/articulo.jpg'
 const Articulos = ({ info }) => {
     const [articulos, setArticulos] = useState([]);
     const navigation = useNavigation()
@@ -52,6 +52,7 @@ const Articulos = ({ info }) => {
                                 }}
                             >
                                 <Image
+                                    source={image}
                                     style={{ width: 450, height: 200 }}
                                     resizeMode="contain"
                                 />
