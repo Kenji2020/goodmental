@@ -62,6 +62,7 @@ const ChatPsicologo = (props) => {
                         paddingRight: 20
                     }}>
                         <View>
+                            {/*hola*/}
                             <SharedElement>
                                 <Text style={{color: 'white', fontSize: 16, fontWeight: 'bold'}}/>
                             </SharedElement>
