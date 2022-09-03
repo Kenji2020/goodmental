@@ -8,7 +8,7 @@ export default function AccountConfirmation() {
         headerTitle="Confirmacion de"
         Link="Home"
         buttonTitle="Explorar Goodmind - share and talk"
-        title=""
+        title="Para meterte en un post haz click en el título"
         subtitle={""}
       />
     </>

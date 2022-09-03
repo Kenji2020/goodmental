@@ -29,7 +29,6 @@ const Articulos = ({ info }) => {
                 docs.push({
                     id: doc.id,
                     ...doc.data(),
-
                 })
             })
             setArticulos([...docs]);
@@ -39,7 +38,7 @@ const Articulos = ({ info }) => {
     },[])
     function renderItem ({item}) {
         return (
-            <View style={{backgroundColor: '#e1e1e1'}}>
+            <View style={{marginTop:10,backgroundColor: '#e1e1e1'}}>
                 <ScrollView showsVerticalScrollIndicator={false}>
                     <View style={{backgroundColor: '#e1e1e1', marginTop:0, marginBottom:0}}>
                         <Card containerStyle={{marginLeft:0, marginRight:0, marginTop:0, marginBottom:0, height:"100%",width:"100%", backgroundColor:'#f6f6f6'}}>
@@ -52,6 +51,7 @@ const Articulos = ({ info }) => {
                                 }}
                             >
                                 <Image
+                                    onPress={()=>{navigation.navigate('ArticuloScreen',{userId: item.id})}}
                                     source={image}
                                     style={{ width: 450, height: 200 }}
                                     resizeMode="contain"

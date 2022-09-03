@@ -15,6 +15,7 @@ import { doc, updateDoc, arrayUnion, arrayRemove } from "firebase/firestore"
 import {SharedElement} from 'react-navigation-shared-element';
 import {AntDesign} from "@expo/vector-icons";
 // Icons
+import imagen from '../assets/articulo.jpg'
 
 import {Feather, FontAwesome} from '@expo/vector-icons'
 import {auth, db} from '../../firebase2'
@@ -136,7 +137,7 @@ const ArticuloScreen = (props) => {
                 <View>
                     <SharedElement>
                         <Image 
-                         
+                         source={imagen}
                          style={{
                             width: '100%',
                             height: height - 450,
