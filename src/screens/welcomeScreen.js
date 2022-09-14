@@ -11,7 +11,6 @@ export default function WelcomeScreen({ navigation }) {
   return (
     <>
     <Screen>
-      <Image style={styles.logo} source={require('../assets/images/logo/logo.png')} />
       <View style={styles.detailsContainer}>
         <View style={styles.textContainer}>
           <AppText preset="h2" style={styles.headingText}>Bienvenid@ a Goodmind </AppText>
@@ -21,7 +20,6 @@ export default function WelcomeScreen({ navigation }) {
           onPress={() => navigation.navigate('Login')} />
       </View>
     </Screen>
-    <Image style={styles.bgImg} source={require('../assets/images/get-start/get-start-bg.png')} />
     </>
   )
 }

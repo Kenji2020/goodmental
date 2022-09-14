@@ -16,8 +16,8 @@ import SubmitButton from './../components/form/SubmitButton';
 import { spacing, colors } from "../theme";
 
 const validationSchema = Yup.object().shape({
-  email: Yup.string().required().email().label("Email"),
-  password: Yup.string().required().min(6).label("Password"),
+  email: Yup.string().required("El email es obligatorio").email("No es un email válido").label("Email"),
+  password: Yup.string().required("La contraseña es obligatoria").min(6).label("Password"),
 });
 
 export default function LoginScreen({ navigation }) {
@@ -39,7 +39,6 @@ export default function LoginScreen({ navigation }) {
       >
 
         <View style={styles.logoContainer}>
-          <Image source={require("../assets/images/logo/logo.png")} />
         </View>
         <View style={styles.formContainer}>
 

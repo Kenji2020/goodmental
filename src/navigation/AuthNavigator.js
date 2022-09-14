@@ -10,7 +10,7 @@ import ResetConfirmation from "../screens/ResetConfirmation";
 import ConfirmationCode from "../screens/ConfirmationCode";
 import AccountConfirmation from "../screens/AccountConfirmation";
 import Home from "../screens/Home";
-
+import Terms from "../screens/Terms";
 const Stack = createNativeStackNavigator();
 
 export default function ScreenNavigator() {
@@ -39,6 +39,8 @@ export default function ScreenNavigator() {
       <Stack.Screen name="ResetConfirmation" component={ResetConfirmation} />
       <Stack.Screen name="ConfirmationCode" component={ConfirmationCode} />
       <Stack.Screen name="AccountConfirmation" component={AccountConfirmation} />
+      <Stack.Screen name="Terms" component={Terms}/>
+
       <Stack.Screen name="Home" component={Home} />
     </Stack.Navigator>
   );

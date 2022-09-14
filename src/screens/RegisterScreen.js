@@ -15,9 +15,9 @@ import SubmitButton from './../components/form/SubmitButton';
 import AppText from './../components/AppText';
 
 const validationSchema = Yup.object().shape({
-  name: Yup.string().required().label("Name"),
-  email: Yup.string().required().email().label("Email"),
-  password: Yup.string().required().min(6).label("Password"),
+  name: Yup.string().required("El nombre es obligatorio").label("Name"),
+  email: Yup.string().required("El email es obligatorio").email("El email no es válido").label("Email"),
+  password: Yup.string().required("La contraseña es obligatoria").min(6).label("Password"),
 });
 
 
@@ -71,7 +71,6 @@ export default function RegisterScreen({ navigation }) {
         showsHorizontalScrollIndicator={false}
       >
         <View style={styles.logoContainer}>
-          <Image source={require("../assets/images/logo/logo.png")} />
         </View>
         <View style={styles.formContainer}>
           <AppForm
@@ -86,7 +85,11 @@ export default function RegisterScreen({ navigation }) {
             <AppFormField placeholderText="Correo electrónico" name="email" />
 
             <AppFormField placeholderText="Contraseña" name="password" secureTextEntry />
-
+            <View style={styles.userCheckMeta}>
+              <TouchableOpacity onPress={() => navigation.navigate("Terms")} >
+                <AppText style={styles.forgotPass}>Al registrarte aceptas nuestros términos y condiciones</AppText>
+              </TouchableOpacity>
+            </View>  
             <SubmitButton title="Registrarse" />
 
           </AppForm>

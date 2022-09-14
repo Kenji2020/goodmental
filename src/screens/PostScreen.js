@@ -147,7 +147,7 @@ const BlogPage = (props) => {
           {auth.currentUser.email === user.autor ||
           auth.currentUser.email === "victor.ignacio.salgado2002@gmail.com" ||
           auth.currentUser.email === "faa.aguilam@gmail.com" || 
-          auth.currentUser.email === "goodmindchile@gmail.com"
+          auth.currentUser.email === "goodmindchile@gmail.com" || auth.currentUser.email === "hola@gmail.com"
           ? (
             <>
               <Button
@@ -238,81 +238,7 @@ const BlogPage = (props) => {
                   {user.nickname}
                 </Text>
               </SharedElement>
-              <View>
-                <FontAwesome name="commenting" size={34} color="black" />
-
-                <View>
-                  <TextInput
-                    onChangeText={(text) => setCommentValue(text)}
-                    placeholder="Comenta algo lindo..."
-                    ref={InputRef}
-                    style={{ width: "100%" }}
-                  />
-                  <Button
-                    title="Comentar"
-                    buttonStyle={{
-                      backgroundColor: "#00a680",
-                      width: "100%",
-                    }}
-                    onPress={() => AddToComments()}
-                  />
-
-                  {(function () {
-                    if (Comments) {
-                      if (Comments.length > 0) {
-                        return Comments.map((comment, index) => {
-                          return (
-                            <View key={index}>
-                              <View style={styles.showComment_container}>
-                                <Text style>{comment.commentValue}</Text>
-                              </View>
-                            </View>
-                          );
-                        });
-                      } else {
-                        return (
-                          <View
-                            style={{
-                              flexDirection: "row",
-                              alignItems: "center",
-                              marginTop: 14,
-                            }}
-                          >
-                            <View
-                              style={{
-                                flex: 1,
-                                flexDirection: "row",
-                                alignItems: "center",
-                                justifyContent: "space-between",
-                                paddingRight: 20,
-                              }}
-                            >
-                              <View>
-                                <SharedElement>
-                                  <Text
-                                    style={{
-                                      color: "black",
-                                      fontSize: 14,
-                                      fontWeight: "bold",
-                                    }}
-                                  />
-                                </SharedElement>
-                                <SharedElement>
-                                  <Text
-                                    style={{ color: "black", fontSize: 12 }}
-                                  >
-                                    No hay comentarios
-                                  </Text>
-                                </SharedElement>
-                              </View>
-                            </View>
-                          </View>
-                        );
-                      }
-                    }
-                  })()}
-                </View>
-              </View>
+            
             </View>
           </View>
         </View>

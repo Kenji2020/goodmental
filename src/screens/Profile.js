@@ -8,16 +8,24 @@ import Header from '../components/Header';
 import { colors } from '../theme';
 import AppText from '../components/AppText';
 import ListItem from '../components/ListItem';
-import { auth, signOut } from '../firebase/firebase';
+import { auth, signOut, deleteUser } from '../firebase/firebase';
 import { Account,CreditCart,Heart,Logout} from '../svg';
 import { isConfirmation, login, selectUser } from '../redux/features/userSlice';
 import Screen from '../components/Screen';
+import { getAuth } from 'firebase/auth';
 
 
 export default function Profile({ navigation }) {
   const dispatch = useDispatch();
   const user = useSelector(selectUser);
-
+  const user2 = auth.currentUser
+  const getAuth2 = getAuth()
+  async function handleDeleteAccount() {
+    user2
+    .delete()
+    .then(() => console.log("User deleted"))
+    .catch((error) => console.log(error));
+  }
   const handleSignOut = () => {
 
     Alert.alert(
@@ -64,6 +72,9 @@ export default function Profile({ navigation }) {
           <ListItem onPress={()=> navigation.navigate('Search')} icon={<Ionicons name="document-text-outline" size={18} color={colors.white} />} title="Artículos" color="#3D3DCC" arrow={true} />
 
           <ListItem onPress={()=> navigation.navigate('WishList')} icon={<Heart />} title="Psicólog@s" color="#33ECE9" arrow={true} />
+
+          <ListItem onPress={handleDeleteAccount} icon={<Logout />} title="Borrar cuenta" color="#FFC226" arrow={true} />
+
 
           <ListItem onPress={handleSignOut} icon={<Logout />} title="Cerrar sesión" color="#FFC226" arrow={true} />
         </View>
